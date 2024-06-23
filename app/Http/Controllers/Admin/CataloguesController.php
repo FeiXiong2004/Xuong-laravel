@@ -68,14 +68,19 @@ class CataloguesController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $catalogues = $request->except('cover');
-        $catalogues['is_active'] ??= 0;
+    {   
+        $catalogue =  Catalogues::query()->findOrFail($id);
+        $data = $request->except('cover');
+        $data['is_active'] ??= 0;
         if($request->hasFile('cover')){
-            $catalogues['cover'] = Storage::put(self::PATH_UPLOAD,$request->file('cover'));
+            $data['cover'] = Storage::put(self::PATH_UPLOAD,$request->file('cover'));
         }
-        Catalogues::query()->findOrFail($id)->update($catalogues);
+        $currentCover = $catalogue->cover;
 
+       $catalogue->update($data);
+        if($currentCover && Storage::exists(self::PATH_UPLOAD)){
+            Storage::delete($currentCover);
+        }
         return redirect()->route('admin.catalogues.index');
     }
 
