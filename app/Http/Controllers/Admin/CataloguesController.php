@@ -18,6 +18,7 @@ class CataloguesController extends Controller
     public function index()
     {
         $catalogues = Catalogues::query()->paginate(5);
+   
         return view(self::PATH_VIEW .  __FUNCTION__ ,compact('catalogues'));
     }
 
@@ -76,12 +77,13 @@ class CataloguesController extends Controller
             $data['cover'] = Storage::put(self::PATH_UPLOAD,$request->file('cover'));
         }
         $currentCover = $catalogue->cover;
+        $catalogue->update($data);
 
-       $catalogue->update($data);
-        if($currentCover && Storage::exists(self::PATH_UPLOAD)){
+        if($request->hasFile('cover') &&    $currentCover && Storage::exists(self::PATH_UPLOAD)){
             Storage::delete($currentCover);
         }
         return redirect()->route('admin.catalogues.index');
+
     }
 
     /**
@@ -90,7 +92,9 @@ class CataloguesController extends Controller
     public function destroy(string $id)
     {
         $catalogue = Catalogues::findOrFail($id)->delete();
-
+        // if($catalogue->cover && Storage::exists(self::PATH_UPLOAD)){
+        //     Storage::delete($catalogue->cover);
+        // }
         return redirect()->route('admin.catalogues.index');
     }
 }

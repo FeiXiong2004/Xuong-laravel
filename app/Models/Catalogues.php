@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Products;
 
 class Catalogues extends Model
 {
@@ -16,4 +17,7 @@ class Catalogues extends Model
     protected $casts=[
         'is_active'=>'boolean',
     ];
+    public function products(){
+        return $this->hasMany(Products::class);
+    }
 }
