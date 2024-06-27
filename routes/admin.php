@@ -16,7 +16,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
         Route::get('show/{id}', [CataloguesController::class,'show'])->name('show');
         Route::get('{id}/edit', [CataloguesController::class, 'edit'])->name('edit');
         Route::put('{id}/update', [CataloguesController::class, 'update'])->name('update');
-        Route::delete('{id}/destroy', [CataloguesController::class, 'destroy'])->name('destroy');
+        Route::delete('destroy/{id}', [CataloguesController::class, 'destroy'])->name('destroy');
     });
     Route::resource('products', ProductsController::class);
 });

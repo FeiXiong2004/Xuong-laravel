@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Catalogues;
 use App\Models\Tag;
+use App\Models\ProductGallery;
+
 class Products extends Model
 {
     use HasFactory;
@@ -41,6 +43,12 @@ class Products extends Model
         return $this->belongsTo(Catalogues::class,'catalogues_id','id');
     }
     public function tags(){
-        return $this->belongsToMany(Tag::class,);
+        return $this->belongsToMany(Tag::class);
+    }
+    public function galleries(){
+        return $this->hasMany(ProductGallery::class);
+    }
+    public function variants(){
+        return $this->hasMany(ProductVariants::class);
     }
 }

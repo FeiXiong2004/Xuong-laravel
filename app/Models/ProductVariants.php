@@ -17,4 +17,7 @@ class ProductVariants extends Model
         'image',
         
     ];
+    public function products(){
+        return $this->belongsTo(Products::class);
+    }
 }

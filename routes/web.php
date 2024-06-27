@@ -1,8 +1,11 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Admin\CataloguesController;
+use App\Http\Controllers\Admin\TestController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +27,7 @@ Route::post('auth/login', [LoginController::class, 'login']);
 Route::post('auth/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('auth/register', [RegisterController::class,'showFormRegister'])->name('register');
 Route::post('auth/register', [RegisterController::class,'register']);
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

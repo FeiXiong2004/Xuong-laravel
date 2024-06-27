@@ -93,13 +93,13 @@
                                 <td>{{ $product->updated_at }}</td>
                                
                                 <td>
-                                    <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-info mb-3">Xem</a>
-                                    <a href="{{ route('admin.products.edit', $product->id) }}"
-                                       class="btn btn-warning mb-3">Sửa</a>
-
-                                    <a href="{{ route('admin.products.destroy', $product->id) }}"
-                                       onclick="return confirm('Chắc chắn chưa?')"
-                                       class="btn btn-danger mb-3">Xóa</a>
+                                    <form action="{{ route('admin.products.destroy',$product ) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                        
+                                        <button onclick="return confirm('Do you wanna Delete')" type="submit" class="btn btn-danger mb-3">Delete</button>
+                                    </form>
+                                   
                                 </td>
                             </tr>
                         @endforeach

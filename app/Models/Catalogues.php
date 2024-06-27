@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Products;
 
 class Catalogues extends Model
-{
+{ 
+    
     use HasFactory;
     protected $fillable=[
         'name',
